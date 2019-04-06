@@ -31,15 +31,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll()
+        .and()
+                .exceptionHandling()
+                .accessDeniedPage("/login");
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("product").password("p").roles("PRODUCT")
-                .and().withUser("customer").password("c").roles("CUSTOMER")
+                .withUser("product").password("{noop}p").roles("PRODUCT")
+                .and().withUser("customer").password("{noop}c").roles("CUSTOMER")
                 .and()
-                .withUser("admin").password("admin1").roles("ADMIN","CUSTOMER","PRODUCT");
+                .withUser("admin").password("{noop}admin1").roles("ADMIN","CUSTOMER","PRODUCT");
     }
 }
