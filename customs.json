@@ -1,0 +1,26 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:text": {
+            "context": "td"
+        },
+        "th:if": {
+            "context": "div"
+        },
+        "th:object": {
+            "context": "form"
+        },
+        "th:src": {
+            "context": "script"
+        },
+        "th:field": {
+            "context": "input"
+        },
+        "th:href": {
+            "context": "link"
+        },
+        "th:each": {
+            "context": "tr"
+        }
+    }
+}
