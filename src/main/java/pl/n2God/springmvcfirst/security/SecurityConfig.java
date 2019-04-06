@@ -12,8 +12,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(
+        http.csrf().disable()//wyłączenie CSRF - dostęp do konsoli H2
+                .authorizeRequests()
+                .antMatchers(
                 "/",
+                "h2-console/**",
                 "/templates/**",
                 "/static/**",
                 "webjars/**")//webjarsy są tworzone po kompilacji - zawsze dodać jak jest bootstrap, jquery etc.
@@ -34,15 +37,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
         .and()
                 .exceptionHandling()
-                .accessDeniedPage("/login");
+                .accessDeniedPage("/login")
+        .and()
+                .headers().frameOptions().disable();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("product").password("{noop}p").roles("PRODUCT")
-                .and().withUser("customer").password("{noop}c").roles("CUSTOMER")
+                .withUser("product").password("p").roles("PRODUCT")
+                .and().withUser("customer").password("c").roles("CUSTOMER")
                 .and()
-                .withUser("admin").password("{noop}admin1").roles("ADMIN","CUSTOMER","PRODUCT");
+                .withUser("admin").password("admin1").roles("ADMIN","CUSTOMER","PRODUCT");
     }
 }
