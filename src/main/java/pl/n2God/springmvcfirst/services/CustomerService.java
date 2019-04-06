@@ -1,6 +1,6 @@
-package eu.szestkam.springmvcfirst.services;
+package pl.n2God.springmvcfirst.services;
 
-import eu.szestkam.springmvcfirst.domain.Customer;
+import pl.n2God.springmvcfirst.domain.Customer;
 
 import java.util.List;
 

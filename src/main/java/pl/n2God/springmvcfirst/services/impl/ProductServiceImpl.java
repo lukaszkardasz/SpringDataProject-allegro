@@ -1,7 +1,9 @@
-package eu.szestkam.springmvcfirst.services.impl;
+package pl.n2God.springmvcfirst.services.impl;
 
-import eu.szestkam.springmvcfirst.domain.Product;
-import eu.szestkam.springmvcfirst.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.n2God.springmvcfirst.domain.Product;
+import pl.n2God.springmvcfirst.repo.ProductRepository;
+import pl.n2God.springmvcfirst.services.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -10,7 +12,11 @@ import java.util.*;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+
     private Map<Integer,Product> products;
+
+    @Autowired
+    private ProductRepository repository;
 
     public ProductServiceImpl() {
         products = new HashMap<>();
@@ -19,23 +25,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> listAllProducts() {
-        return new ArrayList<>(products.values());
+        List<Product> result = new LinkedList<>();
+        repository.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
     public Product getProductById(Integer id) {
-        return products.get(id);
+        //return products.get(id);
+        return repository.findOne(id);
     }
 
     @Override
     public Product saveOrUpdateProduct(Product product) {
         if (product != null){
-            if (product.getId() == null){
+/*            if (product.getId() == null){
                 product.setId(getNextKey());
             }
-            products.put(product.getId(), product);
+            products.put(product.getId(), product);*/
 
-            return product;
+            return repository.save(product);
         } else {
             throw new RuntimeException("Product Can't be nill");
         }
@@ -43,10 +52,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Integer id) {
-        products.remove(id);
+
+        //products.remove(id);
+        repository.delete(id);
     }
 
     private Integer getNextKey(){
+
         return Collections.max(products.keySet()) + 1;
     }
 

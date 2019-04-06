@@ -1,9 +1,15 @@
-package eu.szestkam.springmvcfirst.domain;
+package pl.n2God.springmvcfirst.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
+@Entity
 public class Product {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String description;
     private BigDecimal price;

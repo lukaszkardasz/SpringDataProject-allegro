@@ -1,7 +1,7 @@
-package eu.szestkam.springmvcfirst.controllers;
+package pl.n2God.springmvcfirst.controllers;
 
-import eu.szestkam.springmvcfirst.domain.Customer;
-import eu.szestkam.springmvcfirst.services.CustomerService;
+import pl.n2God.springmvcfirst.domain.Customer;
+import pl.n2God.springmvcfirst.services.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

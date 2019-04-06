@@ -1,7 +1,7 @@
-package eu.szestkam.springmvcfirst.controllers;
+package pl.n2God.springmvcfirst.controllers;
 
-import eu.szestkam.springmvcfirst.domain.Product;
-import eu.szestkam.springmvcfirst.services.ProductService;
+import pl.n2God.springmvcfirst.domain.Product;
+import pl.n2God.springmvcfirst.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

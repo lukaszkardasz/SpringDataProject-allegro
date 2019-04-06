@@ -1,4 +1,4 @@
-package eu.szestkam.springmvcfirst;
+package pl.n2God.springmvcfirst;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
