@@ -16,15 +16,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                 "/",
-                "h2-console/**",
+                "/h2-console/**",
                 "/templates/**",
                 "/static/**",
-                "webjars/**")//webjarsy są tworzone po kompilacji - zawsze dodać jak jest bootstrap, jquery etc.
+                "/webjars/**")//webjarsy są tworzone po kompilacji - zawsze dodać jak jest bootstrap, jquery etc.
                 .permitAll()
                 .antMatchers("/customers/**","/customer/**")
                 .hasRole("CUSTOMER")
                 .antMatchers("/products/**","/product/**")
                 .hasRole("PRODUCT")
+                .anyRequest().authenticated()
+                .antMatchers("/api/**")
+                .hasRole("ADMIN")
                 .anyRequest().authenticated()
          .and()
                 .formLogin().permitAll()
@@ -39,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .accessDeniedPage("/login")
         .and()
-                .headers().frameOptions().disable();
+                .headers().frameOptions().disable()
+        .and()
+                .httpBasic();
     }
 
     @Override
